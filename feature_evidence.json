@@ -1,0 +1,25 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-on-the-profile-page-when-the-logged-in-user-is-the-admin-account-secret-username-shubowner2026-display-a-clearly-visible-admin-dashboard-button-or-link-that-navigates-to-the-admin-route-this-button-must-never-appear-for-non-admin-users",
+      "featureTitle": "On the Profile page, when the logged-in user is the admin account (Secret Username: SHUBOWNER2026), display a clearly visible 'Admin Dashboard' button or link that navigates to the /admin route. This button must never appear for non-admin users.",
+      "files": [
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-21"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

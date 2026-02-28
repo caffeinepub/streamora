@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Streamora is a global mobile-first video sharing web application supporting long videos and shorts, creator monetization, admin-controlled moderation, and Supabase storage. It features dual content types (long videos and shorts), a bottom navigation bar, authentication without OTP/phone, an admin system with hidden controls, a strike system, CPM-based monetization plans, PayPal payouts, and embedded YouTube/Rumble videos for admins.",
+  "architectural_notes": [
+    "Mobile-first responsive UI; browser back button must always return to the previous page",
+    "App logo displayed top-left on all pages; search bar top-right",
+    "Supabase used for storage (long videos, shorts, thumbnails) and likely auth/database",
+    "Admin credentials hardcoded: username SHUBOWNER2026 / password Shubhro@007 — admin UI is same as user UI plus hidden dashboard",
+    "Secret username is private and not searchable; no phone number or OTP in auth flow",
+    "Admin edits to views, subscribers, and earnings must never be revealed to users"
+  ],
+  "known_issues": [
+    "Admin Dashboard is missing/not accessible from the Profile page for the admin account"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-user-authentication-with-a-signup-page-fields-name-secret-username-password-re-enter-password-privacy-policy-link-already-have-an-account-login-link-and-a-login-page-fields-secret-username-password-no-phone-number-no-otp-secret-username-is-private-and-never-searchable-store-credentials-securely-in-the-backend",
+      "title": "Implement user authentication with a Signup page (fields: Name, Secret Username, Password, Re-enter Password, Privacy & Policy link, 'Already have an account? Login' link) and a Login page (fields: Secret Username, Password). No phone number, no OTP. Secret username is private and never searchable. Store credentials securely in the backend.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-persistent-bottom-navigation-bar-visible-on-all-authenticated-pages-with-five-tabs-home-feed-house-icon-shorts-play-icon-upload-icon-notifications-bell-icon-profile-avatar-icon-the-browser-back-button-must-navigate-to-the-previous-page-on-all-routes",
+      "title": "Build a persistent bottom navigation bar visible on all authenticated pages with five tabs: Home Feed (house icon), Shorts (play icon), Upload (+ icon), Notifications (bell icon), Profile (avatar icon). The browser back button must navigate to the previous page on all routes.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-home-feed-page-that-displays-only-long-videos-manually-promoted-by-admin-each-video-card-must-show-its-thumbnail-if-a-video-has-no-thumbnail-it-must-not-appear-on-the-home-feed-instead-show-the-app-logo-as-its-placeholder-thumbnail-in-other-non-feed-contexts-videos-with-1-or-more-strikes-are-excluded-from-home-promotion",
+      "title": "Implement the Home Feed page that displays only long videos manually promoted by admin. Each video card must show its thumbnail. If a video has no thumbnail it must NOT appear on the home feed; instead show the app logo as its placeholder thumbnail in other non-feed contexts. Videos with 1 or more strikes are excluded from home promotion.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-shorts-feed-page-with-vertical-full-screen-auto-playing-short-videos-and-infinite-scroll-each-short-must-have-like-comment-share-and-subscribe-actions-overlaid-on-the-video-promotion-order-is-influenced-by-watch-time-and-engagement-with-an-admin-controlled-soft-algorithm-weight-every-third-item-in-the-shorts-feed-must-be-an-ad-slot",
+      "title": "Implement the Shorts Feed page with vertical full-screen auto-playing short videos and infinite scroll. Each short must have Like, Comment, Share, and Subscribe actions overlaid on the video. Promotion order is influenced by watch time and engagement, with an admin-controlled soft algorithm weight. Every third item in the shorts feed must be an ad slot.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-upload-flow-with-two-options-upload-long-video-and-upload-shorts-long-video-upload-drag-and-drop-or-file-picker-upload-progress-bar-0-100-then-a-next-step-for-title-description-tags-and-optional-thumbnail-if-no-thumbnail-is-provided-video-will-not-be-promoted-to-home-feed-shorts-upload-single-page-form-with-file-picker-title-description-tags-fields-upload-button-and-upload-percentage-display-store-all-video-files-and-thumbnails-in-supabase-storage",
+      "title": "Implement the Upload flow with two options: Upload Long Video and Upload Shorts. Long Video upload: drag-and-drop or file picker, upload progress bar (0–100%), then a 'Next' step for title, description, tags, and optional thumbnail. If no thumbnail is provided, video will not be promoted to home feed. Shorts upload: single-page form with file picker, title, description, tags fields, Upload button, and upload percentage display. Store all video files and thumbnails in Supabase storage.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-notifications-page-that-displays-admin-sent-messages-only-notification-categories-include-payment-approved-rejected-pending-monetization-updates-and-strike-alerts-users-cannot-send-notifications-only-admins-can-push-notifications-to-individual-users-or-all-users",
+      "title": "Implement the Notifications page that displays admin-sent messages only. Notification categories include: payment approved/rejected/pending, monetization updates, and strike alerts. Users cannot send notifications; only admins can push notifications to individual users or all users.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-strike-system-in-the-backend-a-user-can-receive-up-to-3-strikes-1-strike-videos-excluded-from-home-feed-promotion-2-strikes-monetization-disabled-3-strikes-channel-account-deleted-strikes-are-issued-by-admin-only-strike-alerts-are-sent-as-notifications",
+      "title": "Implement the Strike System in the backend. A user can receive up to 3 strikes. 1 strike = videos excluded from home feed promotion. 2 strikes = monetization disabled. 3 strikes = channel/account deleted. Strikes are issued by admin only. Strike alerts are sent as notifications.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-profile-page-showing-user-s-display-name-a-colored-platform-logo-tick-badge-if-monetized-subscriber-count-admin-editable-and-a-grid-of-the-user-s-uploaded-long-videos-and-shorts-own-profile-is-accessible-via-the-profile-tab-other-user-profiles-are-viewable-by-visiting-their-channel",
+      "title": "Implement the Profile Page showing: user's display name, a colored platform-logo tick badge if monetized, subscriber count (admin-editable), and a grid of the user's uploaded long videos and shorts. Own profile is accessible via the Profile tab; other user profiles are viewable by visiting their channel.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-stats-analytics-section-accessible-from-the-user-s-profile-or-a-dedicated-page-display-views-per-video-total-views-subscriber-count-current-cpm-rank-estimated-earnings-total-earnings-and-ad-eligible-status-all-values-are-admin-editable-from-the-admin-dashboard-but-must-never-be-revealed-to-users-as-admin-editable",
+      "title": "Implement a Stats & Analytics section accessible from the user's profile or a dedicated page. Display: views per video, total views, subscriber count, current CPM rank, estimated earnings, total earnings, and ad-eligible status. All values are admin-editable from the admin dashboard but must never be revealed to users as admin-editable.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-monetization-system-eligibility-criteria-100-subscribers-and-1-000-valid-views-on-any-one-video-if-not-eligible-show-a-criteria-page-with-a-request-monetization-button-that-triggers-a-4-second-popup-review-may-take-2-3-business-days-admin-can-approve-monetization-regardless-of-criteria-activation-requires-user-to-provide-paypal-email-address-streamora-ad-pin-issued-by-admin-only-after-both-are-submitted-does-monetization-become-active-and-the-colored-tick-is-granted",
+      "title": "Implement the Monetization system. Eligibility criteria: 100 subscribers AND 1,000 valid views on any one video. If not eligible, show a criteria page with a 'Request Monetization' button that triggers a 4-second popup: 'Review may take 2–3 business days.' Admin can approve monetization regardless of criteria. Activation requires user to provide: PayPal email address + Streamora Ad PIN (issued by admin). Only after both are submitted does monetization become active and the colored tick is granted.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-two-monetization-plans-standard-plan-55-creator-45-platform-ads-enabled-and-premium-plan-70-creator-30-platform-no-ads-on-video-playback-special-events-access-implement-cpm-ranks-bronze-3-silver-5-gold-8-premium-10-admin-can-assign-cpm-rank-and-monetization-plan-per-creator-minimum-payout-threshold-is-100-payouts-are-paypal-only-and-controlled-by-admin",
+      "title": "Implement two monetization plans: Standard Plan (55% creator / 45% platform, ads enabled) and Premium Plan (70% creator / 30% platform, no ads on video playback, special events access). Implement CPM ranks: Bronze ($3), Silver ($5), Gold ($8), Premium ($10). Admin can assign CPM rank and monetization plan per creator. Minimum payout threshold is $100; payouts are PayPal-only and controlled by admin.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-premium-plan-subscription-offering-at-15-month-when-a-user-taps-go-premium-display-a-popup-with-the-message-contact-tvglobalimpact-gmail-com-premium-may-be-granted-free-if-approved-by-admin-admin-can-manually-grant-premium-status-to-any-user-from-the-dashboard-lifetime-premium-can-be-granted-manually-rank-and-trust-system-admin-can-promote-creators-to-trusted-status",
+      "title": "Implement the Premium Plan subscription offering at $15/month. When a user taps 'Go Premium', display a popup with the message: 'Contact: Tvglobalimpact@gmail.com — Premium may be granted free if approved by admin.' Admin can manually grant Premium status to any user from the dashboard. Lifetime Premium can be granted manually. Rank and trust system: admin can promote creators to trusted status.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-ads-system-for-long-videos-show-pre-roll-ads-before-the-video-starts-mid-roll-ads-at-intervals-during-playback-and-end-roll-ads-after-the-video-ends-for-shorts-insert-an-ad-slot-after-every-two-consecutive-shorts-pattern-short-short-ad-short-short-ad-ads-are-served-as-placeholder-ad-units-admin-can-define-ad-content",
+      "title": "Implement the Ads System. For long videos: show pre-roll ads before the video starts, mid-roll ads at intervals during playback, and end-roll ads after the video ends. For shorts: insert an ad slot after every two consecutive shorts (pattern: Short, Short, Ad, Short, Short, Ad). Ads are served as placeholder ad units (admin can define ad content).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-hidden-admin-dashboard-accessible-only-to-the-admin-account-dashboard-sections-total-users-count-monetization-requests-list-approve-reject-payout-requests-list-approve-reject-send-notifications-panel-target-user-or-all-edit-user-stats-panel-views-subscribers-earnings-per-user-event-control-panel-start-events-that-change-site-wide-color-theme-strikes-panel-issue-strikes-to-users-and-creator-management-assign-cpm-rank-plan-trusted-status-premium-grant",
+      "title": "Implement the hidden Admin Dashboard accessible only to the admin account. Dashboard sections: Total Users count, Monetization Requests list (approve/reject), Payout Requests list (approve/reject), Send Notifications panel (target user or all), Edit User Stats panel (views, subscribers, earnings per user), Event Control panel (start events that change site-wide color theme), Strikes panel (issue strikes to users), and Creator Management (assign CPM rank, plan, trusted status, premium grant).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-admin-only-embed-video-page-where-the-admin-can-embed-external-youtube-or-rumble-videos-by-providing-video-url-youtube-or-rumble-title-thumbnail-url-description-and-tags-embedded-videos-appear-in-the-home-feed-as-promoted-content-alongside-native-uploads-this-page-is-not-accessible-to-regular-users",
+      "title": "Implement an admin-only Embed Video page where the admin can embed external YouTube or Rumble videos by providing: video URL (YouTube or Rumble), title, thumbnail URL, description, and tags. Embedded videos appear in the home feed as promoted content alongside native uploads. This page is not accessible to regular users.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-global-search-bar-fixed-at-the-top-right-of-all-pages-the-search-bar-queries-both-long-videos-and-shorts-by-near-title-match-and-shows-live-dropdown-suggestions-as-the-user-types-selecting-a-suggestion-navigates-to-that-video-or-short-search-does-not-expose-secret-usernames",
+      "title": "Implement a global search bar fixed at the top-right of all pages. The search bar queries both long videos and shorts by near-title match and shows live dropdown suggestions as the user types. Selecting a suggestion navigates to that video or short. Search does not expose secret usernames.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-about-monetization-page-with-a-professional-blog-style-layout-explaining-the-creator-program-monetization-criteria-standard-and-premium-plans-cpm-tiers-payout-rules-and-how-to-get-started-include-a-clear-call-to-action-linking-to-the-monetization-request-flow",
+      "title": "Implement an 'About Monetization' page with a professional blog-style layout explaining the creator program, monetization criteria, Standard and Premium plans, CPM tiers, payout rules, and how to get started. Include a clear call-to-action linking to the monetization request flow.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-bold-modern-dark-theme-visual-design-across-the-entire-app-use-deep-charcoal-black-backgrounds-with-vibrant-accent-colors-e-g-electric-red-or-coral-for-ctas-and-highlights-clean-sans-serif-typography-and-smooth-card-based-layouts-the-streamora-logo-must-appear-on-the-top-left-of-every-page-design-must-be-mobile-first-with-responsive-breakpoints-for-tablet-and-desktop",
+      "title": "Apply a bold, modern dark-theme visual design across the entire app. Use deep charcoal/black backgrounds with vibrant accent colors (e.g., electric red or coral for CTAs and highlights), clean sans-serif typography, and smooth card-based layouts. The Streamora logo must appear on the top-left of every page. Design must be mobile-first with responsive breakpoints for tablet and desktop.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-use-a-streamora-app-logo-a-bold-wordmark-or-icon-combining-a-play-button-and-streaming-wave-motif-on-a-dark-background-suitable-for-top-left-placement-and-as-a-thumbnail-fallback",
+      "title": "Generate and use a Streamora app logo: a bold wordmark or icon combining a play button and streaming wave motif, on a dark background, suitable for top-left placement and as a thumbnail fallback.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-profile-page-when-the-logged-in-user-is-the-admin-account-secret-username-shubowner2026-display-a-clearly-visible-admin-dashboard-button-or-link-that-navigates-to-the-admin-route-this-button-must-never-appear-for-non-admin-users",
+      "title": "On the Profile page, when the logged-in user is the admin account (Secret Username: SHUBOWNER2026), display a clearly visible 'Admin Dashboard' button or link that navigates to the /admin route. This button must never appear for non-admin users.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Authentication: Signup (name, secret username, password, privacy policy) and Login (secret username, password) pages with no OTP or phone",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Bottom navigation bar: Home Feed, Shorts, Upload (+), Notifications, Profile",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Home Feed: admin-manually-promoted long videos only; thumbnail required for promotion; app logo fallback if no thumbnail",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Shorts Feed: vertical auto-play, infinite scroll, like/comment/share/subscribe, admin-controlled soft algorithm based on watch time and engagement",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Upload flow: Long Video (drag/select, progress bar, title/description/tags/optional thumbnail) and Shorts (single page, select, title/description/tags, upload progress)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Notifications page: admin-only messages, payment status, monetization updates, strike alerts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Strike system: 1 strike = no home promotion, 2 strikes = monetization disabled, 3 strikes = channel deleted",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Profile page: name, monetization tick, admin-editable subscriber count, uploaded videos and shorts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Stats & Analytics: views per video, total views, subscribers, CPM rank, estimated/total earnings, ad-eligible status — all admin-editable but hidden from users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Monetization system: criteria (100 subs + 1000 views), request button, PayPal email + Ad PIN activation, Standard (55/45) and Premium (70/30) plans, $100 payout threshold",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Ads system: pre/mid/end-roll for long videos; every 3rd short is an ad; CPM ranks Bronze($3), Silver($5), Gold($8), Premium($10)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Premium Plan: $15/month, no ads, special events, contact email popup; admin can grant free premium",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Admin system: hidden dashboard with user management, monetization/payout requests, notification sender, stats editor, theme/event control, embed YouTube/Rumble videos",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Supabase storage for long videos, shorts, and thumbnails",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Global search bar (top-right) with near-title match suggestions for both long videos and shorts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Implement a hardcoded admin account with Secret Username: SHUBOWNER2026 and Password: Shubhro@007. Admin shares the same UI as regular users but gains access to additional hidden admin-only features. Never surface admin capabilities to regular users.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Ensure the admin route guard in App.tsx correctly checks the isAdmin flag from AuthContext and redirects unauthenticated or non-admin users away from all /admin/* routes. Verify the admin flag is set to true when the user with Secret Username SHUBOWNER2026 is logged in.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Streamora",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "build_request",
+  "title": "Fix Admin Dashboard accessibility from Profile page",
+  "projectName": "Streamora",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-21",
+      "text": "On the Profile page, when the logged-in user is the admin account (Secret Username: SHUBOWNER2026), display a clearly visible 'Admin Dashboard' button or link that navigates to the /admin route. This button must never appear for non-admin users.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Admin Dashboard is not there"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When logged in as SHUBOWNER2026, the Profile page shows an 'Admin Dashboard' button/link.",
+        "Clicking the 'Admin Dashboard' button navigates to the admin dashboard page (/admin).",
+        "The 'Admin Dashboard' button is completely absent for all non-admin users.",
+        "The AdminDashboardPage renders correctly at /admin and shows all sub-sections (Total Users, Monetization Requests, Payout Requests, Send Notifications, Edit User Stats, Event Control, Strikes Panel, Creator Management, Embed Video).",
+        "Navigating directly to /admin as a non-admin user redirects to the home page or login page."
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Ensure the admin route guard in App.tsx correctly checks the isAdmin flag from AuthContext and redirects unauthenticated or non-admin users away from all /admin/* routes. Verify the admin flag is set to true when the user with Secret Username SHUBOWNER2026 is logged in.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Admin Dashboard is not there"
+        ]
+      },
+      "acceptanceCriteria": [
+        "AuthContext sets isAdmin to true only when the logged-in user's secret username matches SHUBOWNER2026.",
+        "All /admin/* routes are protected by the admin guard and redirect non-admin or unauthenticated users.",
+        "Admin dashboard sub-pages (creator management, strikes, monetization requests, payout requests, notifications sender, stats editor, event control, embed video) are all reachable via navigation links within the admin dashboard."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not expose admin-only UI elements to regular users.",
+    "Do not modify files under frontend/src/hooks/ (immutable paths).",
+    "Admin credentials remain hardcoded as Secret Username: SHUBOWNER2026 / Password: Shubhro@007 in frontend/src/lib/auth.ts."
+  ],
+  "nonGoals": [
+    "Redesigning the Admin Dashboard pages themselves.",
+    "Adding new admin features beyond what already exists.",
+    "Changing the authentication flow or login page."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

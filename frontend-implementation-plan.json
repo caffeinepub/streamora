@@ -1,0 +1,51 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix Admin Dashboard accessibility from Profile page",
+  "requirements": [
+    {
+      "id": "REQ-21",
+      "summary": "Display 'Admin Dashboard' button on Profile page for admin user SHUBOWNER2026 that navigates to /admin route, hidden for non-admin users",
+      "acceptanceCriteria": [
+        "When logged in as SHUBOWNER2026, the Profile page shows an 'Admin Dashboard' button/link.",
+        "Clicking the 'Admin Dashboard' button navigates to the admin dashboard page (/admin).",
+        "The 'Admin Dashboard' button is completely absent for all non-admin users.",
+        "The AdminDashboardPage renders correctly at /admin and shows all sub-sections (Total Users, Monetization Requests, Payout Requests, Send Notifications, Edit User Stats, Event Control, Strikes Panel, Creator Management, Embed Video).",
+        "Navigating directly to /admin as a non-admin user redirects to the home page or login page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Add conditional rendering of an 'Admin Dashboard' button/link visible only when the logged-in user is the admin (secretUsername === 'SHUBOWNER2026'). Place the button prominently in the action buttons section alongside analytics, monetization, and logout buttons. The button should navigate to the /admin route when clicked. Ensure the button is completely hidden for non-admin users by checking both the isAdmin flag from AuthContext and the secretUsername from the user profile."
+        }
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "summary": "Verify admin route guard in App.tsx correctly checks isAdmin flag and redirects unauthenticated or non-admin users away from /admin/* routes",
+      "acceptanceCriteria": [
+        "AuthContext sets isAdmin to true only when the logged-in user's secret username matches SHUBOWNER2026.",
+        "All /admin/* routes are protected by the admin guard and redirect non-admin or unauthenticated users.",
+        "Admin dashboard sub-pages (creator management, strikes, monetization requests, payout requests, notifications sender, stats editor, event control, embed video) are all reachable via navigation links within the admin dashboard."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Review and verify that the admin route guard correctly checks the isAdmin flag from AuthContext for all /admin/* routes. Ensure that unauthenticated or non-admin users are redirected to either the home page or login page. Confirm that all admin sub-routes (AdminCreatorManagementPage, AdminStrikesPanelPage, AdminMonetizationRequestsPage, AdminPayoutRequestsPage, AdminNotificationSenderPage, AdminUserStatsEditorPage, AdminEventControlPage, AdminEmbedVideoPage) are properly protected by the same guard and are registered in the route tree."
+        },
+        {
+          "path": "frontend/src/contexts/AuthContext.tsx",
+          "operation": "modify",
+          "description": "Review the isAdmin flag logic to ensure it is set to true only when the logged-in user's secretUsername matches 'SHUBOWNER2026'. Verify that the admin flag is properly synchronized with the session state and persisted via localStorage helpers. Ensure the flag is cleared on logout."
+        },
+        {
+          "path": "frontend/src/lib/auth.ts",
+          "operation": "modify",
+          "description": "Verify that the loginUser function returns or sets the isAdmin flag based on the secretUsername matching 'SHUBOWNER2026'. Confirm that the hardcoded admin credentials (Secret Username: SHUBOWNER2026 / Password: Shubhro@007) are correctly checked during login and that the admin flag is returned in the session data."
+        }
+      ]
+    }
+  ]
+}

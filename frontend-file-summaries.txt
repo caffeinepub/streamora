@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main app entry point using TanStack Router with code-based routing, auth guards, and all page routes. Fixes the React hooks rules violation by extracting all inline `component` arrow functions into proper named React components (`LoginPageGuarded`, `SignupPageGuarded`, `RootComponent`, etc.).",
+  "frontend/src/pages/SearchResultsPage.tsx": "Search results page that reads the query from URL search params using `useSearch({ strict: false })` to avoid TanStack Router route ID type errors, then displays matching videos in a grid.",
+  "frontend/src/pages/VideoDetailPage.tsx": "Video detail page that reads the `videoId` param using `useParams({ strict: false })` to avoid route ID type errors, renders the video player or embed player, and handles likes, comments, and subscriptions.",
+  "frontend/src/pages/AdminDashboardPage.tsx": "Admin-only dashboard overview page showing total users, pending monetization/payout counts, and navigation links to all admin sub-pages.",
+  "frontend/src/pages/AdminMonetizationRequestsPage.tsx": "Admin page listing all monetization requests with approve/reject actions that update request status, save user stats, and send notifications.",
+  "frontend/src/pages/AdminPayoutRequestsPage.tsx": "Admin page listing all payout requests with approve/reject actions that update status and send payment notifications to users.",
+  "frontend/src/pages/AdminNotificationSenderPage.tsx": "Admin page with a form to send targeted or broadcast notifications to users, with category selection (general, payment, monetization, strike).",
+  "frontend/src/pages/AdminUserStatsEditorPage.tsx": "Admin page to search for a user and edit their stats including total views, subscribers, earnings, and ad eligibility.",
+  "frontend/src/pages/AdminEventControlPage.tsx": "Admin page to start or stop site-wide themed events (Holiday, Dark Mode, Golden) that change the app's color scheme via CSS class on the body element.",
+  "frontend/src/pages/AdminStrikesPanelPage.tsx": "Admin page to search for a user and issue strikes 1–3, with automatic consequences (home feed removal, monetization disable, channel deletion) and notifications.",
+  "frontend/src/pages/AdminCreatorManagementPage.tsx": "Admin page to search for a creator and manage their CPM rank, monetization plan, premium status, lifetime premium, trusted status, and monetization approval.",
+  "frontend/src/pages/AdminEmbedVideoPage.tsx": "Admin-only page to embed external YouTube or Rumble videos by URL with title, thumbnail, description, tags, and home feed promotion toggle.",
+  "frontend/src/pages/ProfilePage.tsx": "Profile page showing user info, stats, videos/shorts tabs, and action buttons. Now includes a prominent amber \"Admin Dashboard\" button (with ShieldCheck icon and Admin badge) that is conditionally rendered only when `isAdmin` is true, linking to the `/admin` route."
+}

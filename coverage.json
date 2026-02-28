@@ -1,0 +1,49 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-28T08:52:19.272Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-21",
+        "summary": "On the Profile page, when the logged-in user is the admin account (Secret Username: SHUBOWNER2026), display a clearly visible 'Admin Dashboard' button or link that navigates to the /admin route. This button must never appear for non-admin users.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ProfilePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ProfilePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Ensure the admin route guard in App.tsx correctly checks the isAdmin flag from AuthContext and redirects unauthenticated or non-admin users away from all /admin/* routes. Verify the admin flag is set to true when the user with Secret Username SHUBOWNER2026 is logged in.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/contexts/AuthContext.tsx",
+          "frontend/src/lib/auth.ts"
+        ],
+        "matchedFiles": []
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/pages/ProfilePage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
